@@ -4,45 +4,34 @@ class UserController {
   async store(req, res) {
     const { email } = req.body;
 
-    try {
-      const userExist = await User.findOne({ email });
-      if (userExist) res.status(400).json({ error: 'User already exist' });
+    const userExist = await User.findOne({ email });
+    if (userExist) return res.status(400).json({ error: 'User already exist' });
 
-      const { name } = await User.create(req.body);
+    const { _id, name } = await User.create(req.body);
 
-      return res.json({
-        name,
-        email,
-      });
-    } catch (err) {
-      console.error(err.message);
-      return res.status(500).json({ error: 'Server error' });
-    }
+    return res.json({
+      _id,
+      name,
+      email,
+    });
   }
 
   async update(req, res) {
     const { name, oldPassword, password } = req.body;
 
-    try {
-      const user = await User.findById(req.userId);
+    const user = await User.findById(req.userId);
 
-      if (oldPassword && !(await user.checkPassword(oldPassword))) {
-        return res.status(401).json({ error: 'Password does not match' });
-      }
+    if (oldPassword && !(await user.checkPasword(oldPassword)))
+      return res.status(401).json({ error: 'Password does not match' });
 
-      user.name = name;
-      user.password = password;
+    user.name = name;
+    user.password = password;
+    await user.save();
 
-      await user.save();
-
-      return res.json({
-        id: req.userId,
-        name,
-        email: user.email,
-      });
-    } catch (err) {
-      return res.status(500).json({ error: 'Server token' });
-    }
+    return res.json({
+      id: req.userId,
+      name,
+    });
   }
 }
 
