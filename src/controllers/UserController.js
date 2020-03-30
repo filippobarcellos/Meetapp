@@ -4,13 +4,13 @@ class UserController {
   async store(req, res) {
     const { email } = req.body;
 
-    const userExist = await User.findOne({ email });
+    const userExist = await User.findOne({ where: { email } });
     if (userExist) return res.status(400).json({ error: 'User already exist' });
 
-    const { _id, name } = await User.create(req.body);
+    const { id, name } = await User.create(req.body);
 
     return res.json({
-      _id,
+      id,
       name,
       email,
     });

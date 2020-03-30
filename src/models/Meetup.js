@@ -4,7 +4,7 @@ const MeetupSchema = new mongoose.Schema(
   {
     user_id: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'user',
+      ref: 'User',
     },
     title: {
       type: String,
@@ -26,4 +26,4 @@ const MeetupSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-export default mongoose.model('meetup', MeetupSchema);
+export default mongoose.model('Meetup', MeetupSchema);
