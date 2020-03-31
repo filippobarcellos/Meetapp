@@ -11,7 +11,7 @@ export default createGlobalStyle`
     font: 14px 'Roboto', sans-serif;
   }
 
-  html, body, #root {
+  html, body {
     height: 100%;
   }
 
@@ -21,6 +21,7 @@ export default createGlobalStyle`
   }
 
   #root {
+    height: 100vh;
     margin: 0 auto;
   }
 
