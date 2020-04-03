@@ -1,13 +1,13 @@
 import React from "react";
 import { MdAdd } from "react-icons/md";
 
-import DashBoardLayout from "../_layouts/dashboard";
+import DefaultLayout from "../_layouts/default";
 
 import { Form, Button } from "./styles";
 
 export default function Profile() {
   return (
-    <DashBoardLayout>
+    <DefaultLayout>
       <Form>
         <input type="text" value="Filippo Barcellos" />
         <input type="text" value="barcellos.filippo@gmail.com" />
@@ -19,6 +19,6 @@ export default function Profile() {
       <Button className="danger">
         <MdAdd size={16} /> Save Profile
       </Button>
-    </DashBoardLayout>
+    </DefaultLayout>
   );
 }

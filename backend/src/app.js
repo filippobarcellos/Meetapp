@@ -1,18 +1,20 @@
 import express from 'express';
+import cors from 'cors';
 
-import connectionDb from './config/database';
+import './database';
 
 import routes from './routes';
 
 class App {
   constructor() {
     this.server = express();
-    connectionDb();
+
     this.middlewares();
     this.routes();
   }
 
   middlewares() {
+    this.server.use(cors());
     this.server.use(express.json());
   }
 

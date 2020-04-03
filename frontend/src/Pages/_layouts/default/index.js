@@ -4,7 +4,7 @@ import Header from "../../../components/Header";
 
 import { Content } from "./styles";
 
-export default function DashboardLayout({ children }) {
+export default function DefaultLayout({ children }) {
   return (
     <>
       <Header />

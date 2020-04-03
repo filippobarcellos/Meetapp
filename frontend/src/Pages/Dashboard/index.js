@@ -1,14 +1,14 @@
 import React from "react";
 import { MdAddCircleOutline } from "react-icons/md";
 
-import DashBoardLayout from "../_layouts/dashboard";
+import DefaultLayout from "../_layouts/default";
 import MeetupCard from "../../components/MeetupCard";
 
 import { MeetupList } from "./styles";
 
 export default function Dashboard() {
   return (
-    <DashBoardLayout>
+    <DefaultLayout>
       <header>
         <strong>My Meetups</strong>
         <button>
@@ -19,10 +19,7 @@ export default function Dashboard() {
 
       <MeetupList>
         <MeetupCard />
-        <MeetupCard />
-        <MeetupCard />
-        <MeetupCard />
       </MeetupList>
-    </DashBoardLayout>
+    </DefaultLayout>
   );
 }

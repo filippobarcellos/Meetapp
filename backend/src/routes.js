@@ -1,20 +1,12 @@
 import { Router } from 'express';
 
-import UserController from './controllers/UserController';
-import SessionController from './controllers/SessionController';
-import MeetupController from './controllers/MeetupController';
-
-import authMiddleware from './middlewares/auth';
+import UserController from './app/controllers/UserController';
+import SessionController from './app/controllers/SessionController';
 
 const routes = new Router();
 
-routes.get('/users', authMiddleware, UserController.index);
 routes.post('/users', UserController.store);
-routes.put('/users', authMiddleware, UserController.update);
 
 routes.post('/sessions', SessionController.store);
-
-routes.post('/meetups', authMiddleware, MeetupController.store);
-routes.get('/meetups', authMiddleware, MeetupController.index);
 
 export default routes;

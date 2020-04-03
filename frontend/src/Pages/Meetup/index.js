@@ -8,13 +8,13 @@ import {
 
 import banner from "../../assets/banner.jpeg";
 
-import DashBoardLayout from "../_layouts/dashboard";
+import DefaultLayout from "../_layouts/default";
 
 import { BtnContainer, Button, Content } from "./styles";
 
 export default function Meetup() {
   return (
-    <DashBoardLayout>
+    <DefaultLayout>
       <header>
         <strong>React Native's Meetup </strong>
         <BtnContainer>
@@ -51,6 +51,6 @@ export default function Meetup() {
           </span>
         </div>
       </Content>
-    </DashBoardLayout>
+    </DefaultLayout>
   );
 }

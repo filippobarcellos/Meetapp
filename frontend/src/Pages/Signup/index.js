@@ -16,7 +16,7 @@ export default function Signup() {
 
         <button>Create new user</button>
 
-        <Link to="/signin">Sign in</Link>
+        <Link to="/">Sign in</Link>
       </form>
     </AuthLayout>
   );

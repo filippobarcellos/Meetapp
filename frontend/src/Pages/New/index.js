@@ -1,14 +1,14 @@
 import React from "react";
 import { MdAdd } from "react-icons/md";
 
-import DashBoardLayout from "../_layouts/dashboard";
+import DefaultLayout from "../_layouts/default";
 import { MdCameraEnhance } from "react-icons/md";
 
 import { Form, Button, InputWrapper } from "./styles";
 
 export default function New() {
   return (
-    <DashBoardLayout>
+    <DefaultLayout>
       <Form>
         <InputWrapper>
           <button>
@@ -27,6 +27,6 @@ export default function New() {
       <Button className="danger">
         <MdAdd size={16} /> Add Meetup
       </Button>
-    </DashBoardLayout>
+    </DefaultLayout>
   );
 }

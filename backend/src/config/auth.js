@@ -1,4 +1,4 @@
 export default {
-  secret: 'meetapp',
+  secret: 'meeatapp',
   expiresIn: '7d',
 };

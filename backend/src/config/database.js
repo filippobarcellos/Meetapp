@@ -1,20 +1,12 @@
-import mongoose from 'mongoose';
-
-const connection = async () => {
-  try {
-    await mongoose.connect(
-      'mongodb+srv://filippo:18081990@cluster0-ukzai.mongodb.net/meetapp?retryWrites=true&w=majority',
-      {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-        useCreateIndex: true,
-        useFindAndModify: false,
-      }
-    );
-  } catch (err) {
-    console.error(err.message);
-    process.exit(1);
-  }
+module.exports = {
+  dialect: 'postgres',
+  host: 'localhost',
+  username: 'postgres',
+  password: 'postgres',
+  database: 'meetapp1',
+  define: {
+    timestamps: true,
+    underscored: true,
+    underscoredAll: true,
+  },
 };
-
-export default connection;
