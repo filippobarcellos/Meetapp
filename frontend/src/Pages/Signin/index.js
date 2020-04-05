@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 import logo from "../../assets/logo.svg";
@@ -13,10 +13,10 @@ export default function Signin() {
   const [password, setPassword] = useState("");
 
   const dispatch = useDispatch();
+  const loading = useSelector(state => state.auth.loading);
 
   function handleSubmit(e) {
     e.preventDefault();
-    console.log(email, password);
     dispatch(signIn(email, password));
   }
 
@@ -39,7 +39,7 @@ export default function Signin() {
           onChange={e => setPassword(e.target.value)}
         />
 
-        <button type="submit">Sign in</button>
+        <button type="submit">{loading ? "Loading ..." : "Sign in"}</button>
         <Link to="signup">Sign up</Link>
       </form>
     </AuthLayout>

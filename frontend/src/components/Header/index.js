@@ -1,11 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+
+import { signOut } from "../../store/modules/Auth/actions";
 
 import logo from "../../assets/logo.svg";
 
 import { StyledHeader, Content } from "./styles";
 
 export default function Header() {
+  const dispatch = useDispatch();
+
   return (
     <StyledHeader>
       <Content>
@@ -18,7 +23,9 @@ export default function Header() {
           <Link to="/">My Profile</Link>
         </div>
 
-        <button type="button">Logout</button>
+        <button type="button" onClick={() => dispatch(signOut())}>
+          Logout
+        </button>
       </Content>
     </StyledHeader>
   );
