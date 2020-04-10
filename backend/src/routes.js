@@ -15,11 +15,20 @@ routes.post('/users', UserController.store);
 
 routes.post('/sessions', SessionController.store);
 
+// Meetup Routes
+
 routes.post(
   '/meetups',
   authMiddleware,
   upload.single('image'),
   MeetupController.createMeetup
+);
+
+routes.put(
+  '/meetups/:meetupId',
+  authMiddleware,
+  upload.single('image'),
+  MeetupController.editMeetup
 );
 
 export default routes;
