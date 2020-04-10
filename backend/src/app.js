@@ -1,26 +1,16 @@
 import express from 'express';
+import path from 'path';
 import cors from 'cors';
 
-import './database';
+import dbConnection from './config/database';
 
 import routes from './routes';
 
-class App {
-  constructor() {
-    this.server = express();
+const app = express();
+dbConnection();
 
-    this.middlewares();
-    this.routes();
-  }
+app.use(express.json());
+app.use('/images', express.static(path.resolve(__dirname, '..', 'uploads')));
+app.use(routes);
 
-  middlewares() {
-    this.server.use(cors());
-    this.server.use(express.json());
-  }
-
-  routes() {
-    this.server.use(routes);
-  }
-}
-
-export default new App().server;
+app.listen(5000);

@@ -46,7 +46,7 @@ export const signUp = (name, email, password) => async (dispatch) => {
     });
     history.push("/");
   } catch (err) {
-    toast.error("Email or password does not exist.");
+    toast.error(err.message);
     dispatch({
       type: REGISTER_FAILED,
     });

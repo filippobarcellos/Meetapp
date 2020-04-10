@@ -1,31 +1,25 @@
-import Sequelize, { Model } from 'sequelize';
+import mongoose from 'mongoose';
 import bcrypt from 'bcryptjs';
 
-class User extends Model {
-  static init(sequelize) {
-    super.init(
-      {
-        name: Sequelize.STRING,
-        email: Sequelize.STRING,
-        password: Sequelize.STRING,
-      },
-      {
-        sequelize,
-      }
-    );
-
-    this.addHook('beforeSave', async (user) => {
-      if (user.password) {
-        user.password = await bcrypt.hash(user.password, 8);
-      }
-    });
-
-    return this;
+const UserSchema = new mongoose.Schema(
+  {
+    name: String,
+    email: String,
+    password: String,
+  },
+  {
+    timestamps: true,
   }
+);
 
-  checkPassword(password) {
-    return bcrypt.compare(password, this.password);
+UserSchema.methods.checkPassword = function (requestedPassword) {
+  return bcrypt.compare(requestedPassword, this.password);
+};
+
+UserSchema.pre('save', async function (password) {
+  if (this.password) {
+    this.password = await bcrypt.hash(this.password, 8);
   }
-}
+});
 
-export default User;
+export default mongoose.model('user', UserSchema);

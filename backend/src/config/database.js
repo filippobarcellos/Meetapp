@@ -1,12 +1,14 @@
-module.exports = {
-  dialect: 'postgres',
-  host: 'localhost',
-  username: 'postgres',
-  password: 'postgres',
-  database: 'meetapp1',
-  define: {
-    timestamps: true,
-    underscored: true,
-    underscoredAll: true,
-  },
+import mongoose from 'mongoose';
+
+const dbConnection = async () => {
+  try {
+    await mongoose.connect(
+      'mongodb+srv://fbarcellos:18081990@cluster0-ukzai.mongodb.net/meetapp?retryWrites=true&w=majority',
+      { useNewUrlParser: true, useUnifiedTopology: true }
+    );
+  } catch (error) {
+    console.error(error.message);
+  }
 };
+
+export default dbConnection;
