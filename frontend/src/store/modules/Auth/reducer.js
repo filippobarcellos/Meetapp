@@ -4,6 +4,7 @@ import {
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
   LOGIN_FAILED,
+  REGISTER_SUCCESS,
   REGISTER_REQUEST,
   REGISTER_FAILED,
   USER_SIGN_OUT,
@@ -15,32 +16,32 @@ const INITIAL_STATE = {
   loading: false,
 };
 
-export default function auth(state = INITIAL_STATE, action) {
+const auth = produce((draft = INITIAL_STATE, action) => {
   const { type, payload } = action;
 
   switch (type) {
     case LOGIN_REQUEST:
     case REGISTER_REQUEST:
-      return produce(state, (draft) => {
-        draft.loading = true;
-      });
+      draft.loading = true;
+      return draft;
     case LOGIN_SUCCESS:
-      return produce(state, (draft) => {
-        draft.loading = false;
-        draft.token = payload.token;
-        draft.signed = true;
-      });
+      draft.loading = false;
+      draft.token = payload.token;
+      draft.signed = true;
+      return draft;
+    case REGISTER_SUCCESS:
+      draft.loading = false;
     case LOGIN_FAILED:
     case REGISTER_FAILED:
-      return produce(state, (draft) => {
-        draft.loading = false;
-      });
+      draft.loading = false;
+      return draft;
     case USER_SIGN_OUT:
-      return produce(state, (draft) => {
-        draft.token = null;
-        draft.signed = false;
-      });
+      draft.token = null;
+      draft.signed = false;
+      return draft;
     default:
-      return state;
+      return draft;
   }
-}
+});
+
+export default auth;

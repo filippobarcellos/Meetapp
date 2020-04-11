@@ -9,6 +9,7 @@ import routes from './routes';
 const app = express();
 dbConnection();
 
+app.use(cors());
 app.use(express.json());
 app.use('/images', express.static(path.resolve(__dirname, '..', 'uploads')));
 app.use(routes);

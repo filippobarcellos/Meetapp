@@ -24,9 +24,6 @@ export const signIn = (email, password) => async (dispatch) => {
     });
     history.push("/dashboard");
   } catch (err) {
-    toast.error("Email or password does not exist.", {
-      className: "red",
-    });
     dispatch({
       type: LOGIN_FAILED,
     });
@@ -44,9 +41,9 @@ export const signUp = (name, email, password) => async (dispatch) => {
       type: REGISTER_SUCCESS,
       payload: res.data,
     });
+    toast.success("User was created. Please login");
     history.push("/");
   } catch (err) {
-    toast.error(err.message);
     dispatch({
       type: REGISTER_FAILED,
     });
