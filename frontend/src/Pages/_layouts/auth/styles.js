@@ -38,6 +38,11 @@ export const Content = styled.div`
       color: #fff;
     }
 
+    p {
+      color: #f94d6a;
+      margin-bottom: 10px;
+    }
+
     button {
       height: 44px;
       background: #f94d6a;

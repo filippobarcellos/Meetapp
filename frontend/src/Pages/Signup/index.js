@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { useForm } from "react-hook-form";
+import * as yup from "yup";
 
 import logo from "../../assets/logo.svg";
 
@@ -8,40 +10,49 @@ import AuthLayout from "../_layouts/auth";
 
 import { signUp } from "../../store/modules/Auth/actions";
 
+const RegisterSchema = yup.object().shape({
+  name: yup.string().required(),
+  email: yup.string().email().required(),
+  password: yup.string().required(),
+});
+
 export default function Signup() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const { register, handleSubmit, errors } = useForm({
+    validationSchema: RegisterSchema,
+  });
 
   const dispatch = useDispatch();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const onSubmit = ({ name, email, password }) => {
     dispatch(signUp(name, email, password));
   };
 
   return (
     <AuthLayout>
       <img src={logo} alt="Meetapp" />
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <input
           type="text"
+          name="name"
           placeholder="Type your name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
+          ref={register}
         />
+        {errors.name && <p>{errors.name.message}</p>}
+
         <input
           type="text"
+          name="email"
           placeholder="Type your email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          ref={register}
         />
+        {errors.email && <p>{errors.email.message}</p>}
         <input
           type="password"
+          name="password"
           placeholder="Type your password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          ref={register}
         />
+        {errors.password && <p>{errors.password.message}</p>}
 
         <button type="submit">Create new user</button>
 

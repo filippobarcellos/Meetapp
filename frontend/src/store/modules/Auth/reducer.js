@@ -35,10 +35,6 @@ export default function auth(state = INITIAL_STATE, action) {
       return produce(state, (draft) => {
         draft.loading = false;
       });
-    case REGISTER_REQUEST:
-      return produce(state, (draft) => {
-        draft.loading = true;
-      });
     case USER_SIGN_OUT:
       return produce(state, (draft) => {
         draft.token = null;

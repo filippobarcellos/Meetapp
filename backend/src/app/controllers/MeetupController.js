@@ -34,7 +34,7 @@ exports.editMeetup = async function (req, res) {
     return res.status(400).json({ error: 'Meetup does not exist' });
   }
 
-  if (meetup.owner != req.userId) {
+  if (meetup.owner.toString() != req.userId) {
     return res
       .status(400)
       .json({ error: 'You can only edit meetup that you are the owner' });
@@ -58,4 +58,24 @@ exports.editMeetup = async function (req, res) {
   await meetup.save();
 
   return res.status(200).json(meetup);
+};
+
+exports.deleteMeetup = async function (req, res) {
+  const { meetupId } = req.params;
+
+  const meetup = await Meetup.findById(meetupId);
+
+  if (!meetup) {
+    return res.status(400).json({ error: 'Meetup not found' });
+  }
+
+  if (meetup.owner.toString() != req.userId) {
+    return res
+      .status(400)
+      .json({ error: 'You can only edit meetup that you are the owner' });
+  }
+
+  await meetup.remove();
+
+  return res.json({ msg: 'Meetup was deleted' });
 };
