@@ -1,5 +1,5 @@
-import Meetup from '../models/Meetup';
 import { parseISO, isBefore } from 'date-fns';
+import Meetup from '../models/Meetup';
 
 exports.createMeetup = async function (req, res) {
   const { title, description, location, date } = req.body;

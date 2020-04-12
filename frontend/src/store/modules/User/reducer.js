@@ -1,25 +1,34 @@
 import produce from "immer";
 
-import { LOGIN_SUCCESS } from "../Auth/actions";
-import { USER_SIGN_OUT } from "../User/actions";
+import { LOGIN_SUCCESS, USER_SIGN_OUT } from "../Auth/actions";
+import {
+  UPDATE_PROFILE_REQUEST,
+  UPDATE_PROFILE_SUCCESS,
+  UPDATE_PROFILE_FAILED,
+} from "./actions";
 
 const INITIAL_STATE = {
   profile: null,
+  loading: false,
 };
 
-export default function user(state = INITIAL_STATE, action) {
+const user = produce((draft = INITIAL_STATE, action) => {
   const { type, payload } = action;
 
   switch (type) {
     case LOGIN_SUCCESS:
-      return produce(state, (draft) => {
-        draft.profile = payload.user;
-      });
+    case UPDATE_PROFILE_SUCCESS:
+      draft.profile = payload.user;
+      return draft;
     case USER_SIGN_OUT:
-      return produce(state, (draft) => {
-        draft.profile = null;
-      });
+      draft.profile = null;
+      return draft;
+    // case UPDATE_PROFILE_REQUEST:
+    //   return (draft.loading = true);
+    case UPDATE_PROFILE_FAILED:
     default:
-      return state;
+      return draft;
   }
-}
+});
+
+export default user;

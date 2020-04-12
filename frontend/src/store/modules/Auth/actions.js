@@ -1,4 +1,5 @@
 import { toast } from "react-toastify";
+import api from "../../../services/api";
 import history from "../../../services/history";
 import axios from "axios";
 
@@ -17,7 +18,7 @@ export const signIn = (email, password) => async (dispatch) => {
   dispatch({ type: LOGIN_REQUEST });
 
   try {
-    const res = await axios.post("http://localhost:5000/sessions", body);
+    const res = await api.post("sessions", body);
     dispatch({
       type: LOGIN_SUCCESS,
       payload: res.data,

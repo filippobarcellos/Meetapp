@@ -20,7 +20,7 @@ export default function Header() {
 
         <div>
           <span>Filippo Barcellos</span>
-          <Link to="/">My Profile</Link>
+          <Link to="/profile">My Profile</Link>
         </div>
 
         <button type="button" onClick={() => dispatch(signOut())}>

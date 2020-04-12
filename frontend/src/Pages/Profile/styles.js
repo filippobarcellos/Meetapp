@@ -25,8 +25,6 @@ export const Form = styled.form`
 `;
 
 export const Button = styled.button`
-  position: absolute;
-  right: 0;
   align-items: center;
   color: #fff;
   border: 0;

@@ -11,7 +11,9 @@ import MeetupController from './app/controllers/MeetupController';
 const routes = new Router();
 const upload = multer(multerConfig);
 
-routes.post('/users', UserController.store);
+// Users Routes
+routes.post('/users', UserController.createUser);
+routes.put('/users', authMiddleware, UserController.updateUser);
 
 routes.post('/sessions', SessionController.store);
 
