@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { darken } from "polished";
 
 export const Wrapper = styled.div`

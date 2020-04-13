@@ -28,8 +28,9 @@ export const Form = styled.form`
 `;
 
 export const Button = styled.button`
-  position: absolute;
-  right: 0;
+  align-self: flex-end;
+  width: 20%;
+  margin-right: auto;
   align-items: center;
   color: #fff;
   border: 0;
@@ -39,7 +40,7 @@ export const Button = styled.button`
   font-weight: bold;
   height: 44px;
   justify-content: space-between;
-  margin: 5px 10px;
+  margin: 5px;
   padding: 0 20px;
   transition: background 0.2s;
 
@@ -58,28 +59,30 @@ export const Button = styled.button`
 
 export const InputWrapper = styled.div`
   background: rgba(0, 0, 0, 0.3);
-  position: relative;
   overflow: hidden;
   margin-bottom: 10px;
-  height: 300px;
+  height: 260px;
   display: flex;
   justify-content: center;
+  align-items: center;
+  position: relative;
 
-  button {
-    font-size: 30px;
-    border: none;
-    background: none;
+  div {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
     color: #fff;
-    opacity: 0.2;
-    font-weight: bold;
+    opacity: 0.3;
+    z-index: -1;
   }
 
   input[type="file"] {
-    position: absolute;
-    font-size: 60px;
+    height: 100%;
+    font-size: 100px;
     cursor: pointer;
-    top: 0;
-    left: 0;
+    background: red;
     opacity: 0;
+    z-index: 999;
+    position: absolute;
   }
 `;

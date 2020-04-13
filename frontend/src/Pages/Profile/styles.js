@@ -25,7 +25,7 @@ export const Form = styled.form`
 `;
 
 export const Button = styled.button`
-  align-items: center;
+  align-self: flex-end;
   color: #fff;
   border: 0;
   border-radius: 4px;

@@ -25,7 +25,6 @@ export default function Signin() {
   };
 
   const dispatch = useDispatch();
-  const loading = useSelector((state) => state.auth.loading);
 
   return (
     <AuthLayout>
@@ -46,7 +45,7 @@ export default function Signin() {
         />
         {errors.password && <p>{errors.password.message}</p>}
 
-        <button type="submit">{loading ? "Loading ..." : "Sign in"}</button>
+        <button type="submit">Sign in</button>
         <Link to="signup">Sign up</Link>
       </form>
     </AuthLayout>
