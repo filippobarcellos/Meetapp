@@ -69,7 +69,7 @@ exports.deleteMeetup = async function (req, res) {
     return res.status(400).json({ error: 'Meetup not found' });
   }
 
-  if (meetup.owner.toString() != req.userId) {
+  if (meetup.owner.toString() !== req.userId) {
     return res
       .status(400)
       .json({ error: 'You can only edit meetup that you are the owner' });
@@ -78,4 +78,10 @@ exports.deleteMeetup = async function (req, res) {
   await meetup.remove();
 
   return res.json({ msg: 'Meetup was deleted' });
+};
+
+exports.getAllMeetups = async function (req, res) {
+  const meetups = await Meetup.find();
+
+  return res.json(meetups);
 };

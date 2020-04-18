@@ -1,5 +1,11 @@
 import User from '../models/User';
 
+exports.getUsers = async function (req, res) {
+  const users = await User.find();
+
+  return res.json(users);
+};
+
 exports.createUser = async function (req, res) {
   const user = await User.findOne({ where: { email: req.body.email } });
 

@@ -16,7 +16,7 @@ UserSchema.methods.checkPassword = function (requestedPassword) {
   return bcrypt.compare(requestedPassword, this.password);
 };
 
-UserSchema.pre('save', async function (password) {
+UserSchema.pre('save', async function () {
   if (this.password) {
     this.password = await bcrypt.hash(this.password, 8);
   }
