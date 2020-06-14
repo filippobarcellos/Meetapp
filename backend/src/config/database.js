@@ -2,10 +2,10 @@ import mongoose from 'mongoose';
 
 const dbConnection = async () => {
   try {
-    await mongoose.connect(
-      'mongodb+srv://fbarcellos:18081990@cluster0-ukzai.mongodb.net/meetapp?retryWrites=true&w=majority',
-      { useNewUrlParser: true, useUnifiedTopology: true }
-    );
+    await mongoose.connect('mongodb://127.0.0.1:27017/meetapp', {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
   } catch (error) {
     console.error(error.message);
   }

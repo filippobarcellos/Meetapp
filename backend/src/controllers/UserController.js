@@ -1,8 +1,11 @@
 import User from '../models/User';
 
 exports.getUsers = async function (req, res) {
-  const users = await User.find();
-
+  const users = await User.find().populate('meetups', [
+    'title',
+    'description',
+    'banner',
+  ]);
   return res.json(users);
 };
 
