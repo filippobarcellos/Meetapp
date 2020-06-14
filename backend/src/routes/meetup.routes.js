@@ -17,6 +17,7 @@ routes.post(
   MeetupController.store
 );
 routes.get('/:id', authMiddleware, MeetupController.show);
+routes.get('/', MeetupController.index);
 routes.put(
   '/:id',
   authMiddleware,

@@ -34,6 +34,10 @@ module.exports = {
     }
   },
 
+  async index(req, res) {
+    return res.json({ ok: true });
+  },
+
   async show(req, res) {
     try {
       const meetupId = req.params.id;
