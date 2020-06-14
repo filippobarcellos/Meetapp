@@ -104,4 +104,28 @@ module.exports = {
       console.log(err.message);
     }
   },
+
+  async delete(req, res) {
+    try {
+      const meetupId = req.params.id;
+
+      const meetup = await Meetup.findById(meetupId);
+
+      if (!meetup) {
+        return res.status(400).json({ error: 'Meetup was not found' });
+      }
+
+      if (meetup.owner.toString() !== req.userId) {
+        return res.status(401).json({
+          error: 'You can only delete a meetup that you are the owner',
+        });
+      }
+
+      await meetup.remove();
+
+      return res.json({ success: 'Meetup was deleted' });
+    } catch (err) {
+      console.log(err.message);
+    }
+  },
 };

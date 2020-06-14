@@ -23,5 +23,6 @@ routes.put(
   upload.single('image'),
   MeetupController.update
 );
+routes.delete('/:id', authMiddleware, MeetupController.delete);
 
 export default routes;
