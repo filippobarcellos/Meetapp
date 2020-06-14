@@ -16,7 +16,12 @@ routes.post(
   upload.single('image'),
   MeetupController.store
 );
-
 routes.get('/:id', authMiddleware, MeetupController.show);
+routes.put(
+  '/:id',
+  authMiddleware,
+  upload.single('image'),
+  MeetupController.update
+);
 
 export default routes;
