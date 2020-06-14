@@ -17,4 +17,6 @@ routes.post(
   MeetupController.store
 );
 
+routes.get('/:id', authMiddleware, MeetupController.show);
+
 export default routes;
