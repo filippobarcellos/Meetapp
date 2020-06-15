@@ -1,14 +1,14 @@
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
+import history from "../../services/history";
+
+import { AuthContext } from "../../context/Auth";
 
 import logo from "../../assets/logo.svg";
 
 import AuthLayout from "../_layouts/auth";
-
-import { signIn } from "../../store/modules/Auth/actions";
 
 const LoginSchema = yup.object().shape({
   email: yup.string().email().required(),
@@ -20,11 +20,16 @@ export default function Signin() {
     validationSchema: LoginSchema,
   });
 
-  const onSubmit = ({ email, password }) => {
-    dispatch(signIn(email, password));
-  };
+  const { signIn } = useContext(AuthContext);
 
-  const dispatch = useDispatch();
+  const onSubmit = ({ email, password }) => {
+    try {
+      signIn({ email, password });
+      history.push("/dashboard");
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
 
   return (
     <AuthLayout>

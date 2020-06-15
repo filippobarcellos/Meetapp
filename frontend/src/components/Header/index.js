@@ -1,15 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
-
-import { signOut } from "../../store/modules/Auth/actions";
 
 import logo from "../../assets/logo.svg";
 
 import { StyledHeader, Content } from "./styles";
+import { AuthContext } from "../../context/Auth";
 
 export default function Header() {
-  const dispatch = useDispatch();
+  const { user, signOut } = useContext(AuthContext);
 
   return (
     <StyledHeader>
@@ -19,11 +17,11 @@ export default function Header() {
         </Link>
 
         <div>
-          <span>Filippo Barcellos</span>
+          <span>{user.name}</span>
           <Link to="/profile">My Profile</Link>
         </div>
 
-        <button type="button" onClick={() => dispatch(signOut())}>
+        <button type="button" onClick={signOut}>
           Logout
         </button>
       </Content>

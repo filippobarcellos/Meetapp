@@ -1,15 +1,19 @@
-import React from "react";
+import React, { useContext } from "react";
 import PropTypes from "prop-types";
 import { Route, Redirect } from "react-router-dom";
 
-import { store } from "../store/index";
+import { AuthContext } from "../context/Auth";
+
+import AuthLayout from "../Pages/_layouts/auth";
+import DefaultLayout from "../Pages/_layouts/default";
 
 export default function RouteWrapper({
   component: Component,
   isPrivate,
   ...rest
 }) {
-  const signed = store.getState().auth.signed;
+  const { user } = useContext(AuthContext);
+  const signed = !!user;
 
   if (!signed && isPrivate) {
     return <Redirect to="/" />;
@@ -19,14 +23,25 @@ export default function RouteWrapper({
     return <Redirect to="/dashboard" />;
   }
 
-  return <Route {...rest} component={Component} />;
+  const Layout = signed ? DefaultLayout : AuthLayout;
+
+  return (
+    <Route
+      {...rest}
+      render={(props) => (
+        <Layout>
+          <Component {...props} />
+        </Layout>
+      )}
+    />
+  );
 }
 
 RouteWrapper.propTypes = {
   isPrivate: PropTypes.bool,
-  component: PropTypes.oneOfType([PropTypes.element, PropTypes.func])
+  component: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
 };
 
 RouteWrapper.defaultProps = {
-  isPrivate: false
+  isPrivate: false,
 };

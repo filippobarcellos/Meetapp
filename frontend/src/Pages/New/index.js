@@ -1,6 +1,5 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
 import { MdAdd } from "react-icons/md";
 import { MdCameraEnhance } from "react-icons/md";
 
@@ -8,10 +7,7 @@ import DefaultLayout from "../_layouts/default";
 
 import { Form, Button, InputWrapper } from "./styles";
 
-import { createMeetup } from "../../store/modules/Meetup/actions";
-
 export default function New() {
-  const dispatch = useDispatch();
   const { register, handleSubmit } = useForm();
 
   const onSubmit = ({ file, title, description, date, location }) => {
@@ -21,7 +17,6 @@ export default function New() {
     data.append("description", description);
     data.append("date", date);
     data.append("location", location);
-    dispatch(createMeetup(data));
   };
 
   return (
