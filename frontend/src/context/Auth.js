@@ -31,14 +31,16 @@ export const AuthProvider = ({ children }) => {
     localStorage.setItem("@meetapp:token", token);
     localStorage.setItem("@meetapp:user", JSON.stringify(user));
 
-    setData({ token, user });
+    api.defaults.headers.authorization = `Bearer ${token}`;
 
-    api.headers.authorization = `Bearer ${token}`;
+    setData({ token, user });
   }, []);
 
   const signOut = useCallback(() => {
     localStorage.removeItem("@meetapp:token");
     localStorage.removeItem("@meetapp:user");
+
+    setData({});
   }, []);
 
   return (

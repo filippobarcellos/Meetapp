@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import * as yup from "yup";
 import history from "../../services/history";
+import * as yup from "yup";
 
 import { AuthContext } from "../../context/Auth";
 

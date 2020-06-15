@@ -34,7 +34,7 @@ export default function Dashboard() {
       <MeetupList>
         {meetups &&
           meetups.map((meetup) => (
-            <MeetupCard key={meetup.id} meetup={meetup} />
+            <MeetupCard key={meetup._id} meetup={meetup} />
           ))}
       </MeetupList>
     </>
