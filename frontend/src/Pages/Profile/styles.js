@@ -2,9 +2,10 @@ import styled from "styled-components";
 import { darken } from "polished";
 
 export const Form = styled.form`
+  max-width: 600px;
   display: flex;
   flex-direction: column;
-  margin-top: 40px;
+  margin: 60px auto;
 
   input {
     background: rgba(0, 0, 0, 0.1);

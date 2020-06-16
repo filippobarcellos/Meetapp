@@ -3,8 +3,6 @@ import { useForm } from "react-hook-form";
 import { MdAdd } from "react-icons/md";
 import { MdCameraEnhance } from "react-icons/md";
 
-import DefaultLayout from "../_layouts/default";
-
 import { Form, Button, InputWrapper } from "./styles";
 
 export default function New() {
@@ -20,7 +18,7 @@ export default function New() {
   };
 
   return (
-    <DefaultLayout>
+    <>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <InputWrapper>
           <input type="file" name="file" ref={register} />
@@ -47,6 +45,6 @@ export default function New() {
           <MdAdd size={16} /> Add Meetup
         </Button>
       </Form>
-    </DefaultLayout>
+    </>
   );
 }

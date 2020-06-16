@@ -7,7 +7,7 @@ export default function MeetupCard({ meetup }) {
   return (
     <Item>
       <span>{meetup.title}</span>
-      <time>July 24, 20h</time>
+      <time>{meetup.date}</time>
       <MdChevronRight size={20} color="#fff" />
     </Item>
   );

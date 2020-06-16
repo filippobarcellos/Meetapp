@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { parseISO, format } from "date-fns";
+import pt from "date-fns/locale/pt";
+
 import { MdAddCircleOutline } from "react-icons/md";
 import api from "../../services/api";
 
@@ -13,7 +16,16 @@ export default function Dashboard() {
   useEffect(() => {
     async function loadMeetups() {
       const { data } = await api.get("dashboard");
-      setMeetups(data);
+
+      const newData = data.map((meetup) => {
+        return {
+          ...meetup,
+          date: format(parseISO(meetup.date), "d 'de' MMMM', às ' h'h'", {
+            locale: pt,
+          }),
+        };
+      });
+      setMeetups(newData);
     }
 
     loadMeetups();
@@ -32,6 +44,7 @@ export default function Dashboard() {
       </header>
 
       <MeetupList>
+        {console.log(meetups)}
         {meetups &&
           meetups.map((meetup) => (
             <MeetupCard key={meetup._id} meetup={meetup} />
