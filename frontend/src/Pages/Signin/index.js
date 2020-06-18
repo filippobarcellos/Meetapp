@@ -22,9 +22,9 @@ export default function Signin() {
 
   const { signIn } = useContext(AuthContext);
 
-  const onSubmit = ({ email, password }) => {
+  const onSubmit = async ({ email, password }) => {
     try {
-      signIn({ email, password });
+      await signIn({ email, password });
       history.push("/dashboard");
     } catch (err) {
       console.log(err.message);

@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
 import { MdAdd } from "react-icons/md";
+import { useForm } from "react-hook-form";
 import api from "../../services/api";
 
 import { AuthContext } from "../../context/Auth";
@@ -7,52 +8,60 @@ import { AuthContext } from "../../context/Auth";
 import { Form, Button } from "./styles";
 
 export default function Profile() {
-  const [data, setData] = useState({
-    name: "",
-    email: "",
-    oldPassword: "",
-    password: "",
+  const { user, updateUser } = useContext(AuthContext);
+
+  const { register, handleSubmit } = useForm({
+    defaultValues: {
+      name: user.name,
+      email: user.email,
+    },
   });
 
-  const { user } = useContext(AuthContext);
+  const onSubmit = async (data) => {
+    let formData;
 
-  // const formData = Object.assign({
-  //   name: data.name,
-  //   email: data.email
-  // }, { data.oldPassword ? {
-  //   oldPassword: data.oldPassword,
-  //   password: data.password,
-  // });
+    data.oldPassword
+      ? (formData = {
+          name: data.name,
+          email: data.email,
+          oldPassword: data.oldPassword,
+          password: data.password,
+        })
+      : (formData = {
+          name: data.name,
+          email: data.email,
+        });
 
-  const handleChange = (e) => {
-    setData({ ...data, [e.target.name]: e.target.value });
-  };
+    try {
+      const response = await api.put("/users", formData);
+      console.log(response.data);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    console.log(data);
+      updateUser(response.data.user);
+    } catch (err) {
+      console.log(err.message);
+    }
   };
 
   return (
     <>
-      <Form onSubmit={handleSubmit}>
-        <input type="text" name="name" onChange={(e) => handleChange(e)} />
+      <Form onSubmit={handleSubmit(onSubmit)}>
+        <input type="text" name="name" ref={register} />
 
-        <input type="text" name="email" onChange={(e) => handleChange(e)} />
+        <input type="text" name="email" ref={register} />
 
         <hr />
         <input
           type="password"
           name="oldPassword"
           placeholder="Old password"
-          onChange={(e) => handleChange(e)}
+          ref={register}
         />
 
         <input
           type="password"
           name="password"
           placeholder="New password"
-          onChange={(e) => handleChange(e)}
+          ref={register}
         />
 
         <Button type="submit" className="danger">

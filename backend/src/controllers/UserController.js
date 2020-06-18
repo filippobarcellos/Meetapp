@@ -18,7 +18,7 @@ module.exports = {
   },
 
   async update(req, res) {
-    const { email, oldPassword } = req.body;
+    const { name, email, oldPassword } = req.body;
     const user = await User.findById(req.userId);
 
     if (email !== user.email) {
@@ -33,10 +33,12 @@ module.exports = {
       return res.status(401).json({ error: 'Password does not match' });
     }
 
-    const { name } = await user.updateOne(req.body);
+    await user.updateOne(req.body);
     return res.json({
-      name,
-      email,
+      user: {
+        name,
+        email,
+      },
     });
   },
 };
