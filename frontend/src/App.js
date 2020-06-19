@@ -3,7 +3,7 @@ import { Router } from "react-router-dom";
 import Routes from "./routes";
 import history from "./services/history";
 
-import { AuthProvider } from "./context/Auth";
+import { AppProvider } from "./context";
 
 import GlobalStyle from "./styles/global";
 
@@ -11,13 +11,13 @@ import ToastContainer from "./components/ToastContainer";
 
 function App() {
   return (
-    <AuthProvider>
+    <AppProvider>
       <Router history={history}>
         <Routes />
         <GlobalStyle />
         <ToastContainer />
       </Router>
-    </AuthProvider>
+    </AppProvider>
   );
 }
 

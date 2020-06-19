@@ -31,6 +31,10 @@ export const Toast = styled.div`
   box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
   ${(props) => toastTypeVariations[props.type] || toastTypeVariations["info"]}
 
+  & + div {
+    margin-top: 16px;
+  }
+
   display: flex;
 
   > svg {
