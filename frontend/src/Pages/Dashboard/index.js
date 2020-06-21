@@ -44,7 +44,6 @@ export default function Dashboard() {
       </header>
 
       <MeetupList>
-        {console.log(meetups)}
         {meetups &&
           meetups.map((meetup) => (
             <MeetupCard key={meetup._id} meetup={meetup} />

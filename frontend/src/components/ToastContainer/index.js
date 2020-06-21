@@ -6,7 +6,7 @@ import { Container, Toast } from "./styles";
 function ToastContainer() {
   return (
     <Container>
-      <Toast type="error">
+      {/* <Toast type="error">
         <FiAlertCircle />
 
         <div>
@@ -17,32 +17,7 @@ function ToastContainer() {
         <button type="button">
           <FiXCircle />
         </button>
-      </Toast>
-      <Toast>
-        <FiAlertCircle />
-
-        <div>
-          <strong>Aconteceu um erro</strong>
-          <p>Teste erro</p>
-        </div>
-
-        <button type="button">
-          <FiXCircle />
-        </button>
-      </Toast>
-
-      <Toast>
-        <FiAlertCircle />
-
-        <div>
-          <strong>Aconteceu um erro</strong>
-          <p>Teste erro</p>
-        </div>
-
-        <button type="button">
-          <FiXCircle />
-        </button>
-      </Toast>
+      </Toast> */}
     </Container>
   );
 }

@@ -8,10 +8,21 @@ export const Wrapper = styled.div`
   align-items: center;
 `;
 
+const appear = keyframes`
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+`;
+
 export const Content = styled.div`
   width: 100%;
   max-width: 300px;
   text-align: center;
+
+  animation: ${appear} 2s;
 
   a {
     color: #fff;

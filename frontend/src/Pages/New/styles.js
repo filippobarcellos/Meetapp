@@ -29,7 +29,7 @@ export const Form = styled.form`
 
 export const Button = styled.button`
   align-self: flex-end;
-  width: 20%;
+  width: 17%;
   margin-right: auto;
   align-items: center;
   color: #fff;

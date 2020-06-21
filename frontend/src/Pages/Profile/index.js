@@ -34,7 +34,6 @@ export default function Profile() {
 
     try {
       const response = await api.put("/users", formData);
-      console.log(response.data);
 
       updateUser(response.data.user);
     } catch (err) {
