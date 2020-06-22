@@ -1,22 +1,24 @@
 import React from "react";
+import { useLocation } from "react-router-dom";
 import {
   MdDelete,
   MdEdit,
   MdPinDrop,
-  MdPermContactCalendar
+  MdPermContactCalendar,
 } from "react-icons/md";
 
 import banner from "../../assets/banner.jpeg";
 
-import DefaultLayout from "../_layouts/default";
-
 import { BtnContainer, Button, Content } from "./styles";
 
 export default function Meetup() {
+  const {
+    state: { meetup },
+  } = useLocation();
   return (
-    <DefaultLayout>
+    <>
       <header>
-        <strong>React Native's Meetup </strong>
+        <strong>{meetup.title}</strong>
         <BtnContainer>
           <Button className="primary">
             <MdEdit size={18} color="#fff" />
@@ -30,27 +32,17 @@ export default function Meetup() {
       </header>
 
       <Content>
-        <img src={banner} alt="React native meetup" />
-        <p>
-          Sed et enim in lectus egestas posuere blandit id mauris. Curabitur in
-          purus turpis. Vivamus nec interdum sem. Quisque consectetur metus
-          vitae urna tincidunt euismod. Praesent nec varius velit. Praesent
-          fermentum condimentum aliquet. Aliquam erat urna, placerat vel lectus
-          in, pulvinar maximus diam. Integer non interdum sem.
-        </p>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
-          hendrerit mattis tempor. Vivamus condimentum quam metus.
-        </p>
+        <img src={meetup.image} alt={meetup.title} />
+        <p>{meetup.description}</p>
         <div>
           <span>
-            <MdPermContactCalendar size={16} /> July 24, 20h
+            <MdPermContactCalendar size={16} /> {meetup.date}
           </span>
           <span>
-            <MdPinDrop size={16} /> Queen Elizabeth Street, 234
+            <MdPinDrop size={16} /> {meetup.location}
           </span>
         </div>
       </Content>
-    </DefaultLayout>
+    </>
   );
 }

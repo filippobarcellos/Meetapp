@@ -46,7 +46,12 @@ export default function Dashboard() {
       <MeetupList>
         {meetups &&
           meetups.map((meetup) => (
-            <MeetupCard key={meetup._id} meetup={meetup} />
+            <Link
+              key={meetup._id}
+              to={{ pathname: `/meetup/${meetup._id}`, state: { meetup } }}
+            >
+              <MeetupCard meetup={meetup} />
+            </Link>
           ))}
       </MeetupList>
     </>
