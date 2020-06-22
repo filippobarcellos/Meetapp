@@ -1,23 +1,15 @@
 import React from "react";
-import { FiAlertCircle, FiXCircle } from "react-icons/fi";
 
-import { Container, Toast } from "./styles";
+import Toast from "./Toast";
 
-function ToastContainer() {
+import { Container } from "./styles";
+
+function ToastContainer({ messages, onDelete }) {
   return (
     <Container>
-      {/* <Toast type="error">
-        <FiAlertCircle />
-
-        <div>
-          <strong>Aconteceu um erro</strong>
-          <p>Teste erro</p>
-        </div>
-
-        <button type="button">
-          <FiXCircle />
-        </button>
-      </Toast> */}
+      {messages.map((message) => (
+        <Toast key={message.id} message={message} />
+      ))}
     </Container>
   );
 }

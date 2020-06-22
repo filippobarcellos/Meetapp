@@ -1,28 +1,34 @@
-import React, { createContext, useCallback, useContext } from "react";
+import React, { createContext, useState } from "react";
+import { uuid } from "uuidv4";
 
 import ToastContainer from "../components/ToastContainer";
 
-const ToastContext = createContext({});
+export const ToastContext = createContext({});
 
-const ToastProvider = ({ children }) => {
-  const addToast = useCallback(() => {}, []);
+export const ToastProvider = ({ children }) => {
+  const [messages, setMessages] = useState([]);
 
-  const removeToast = useCallback(() => {}, []);
+  function addToast({ type, title, description }) {
+    const id = uuid();
+
+    const toast = {
+      id,
+      type,
+      title,
+      description,
+    };
+
+    setMessages((state) => [...state, toast]);
+  }
+
+  function removeToast(id) {
+    setMessages((state) => state.filter((message) => message.id !== id));
+  }
 
   return (
     <ToastContext.Provider value={{ addToast, removeToast }}>
       {children}
-      <ToastContainer />
+      <ToastContainer messages={messages} />
     </ToastContext.Provider>
   );
 };
-
-function useToast() {
-  const context = useContext(ToastContext);
-
-  if (!context) {
-    throw new Error("useToast must be used within a ToastProvider");
-  }
-}
-
-export { ToastProvider, useToast };

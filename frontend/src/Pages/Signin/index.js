@@ -5,6 +5,7 @@ import history from "../../services/history";
 import * as yup from "yup";
 
 import { AuthContext } from "../../context/Auth";
+import { ToastContext } from "../../context/Toast";
 
 import logo from "../../assets/logo.svg";
 
@@ -21,13 +22,18 @@ export default function Signin() {
   });
 
   const { signIn } = useContext(AuthContext);
+  const { addToast } = useContext(ToastContext);
 
   const onSubmit = async ({ email, password }) => {
     try {
       await signIn({ email, password });
       history.push("/dashboard");
     } catch (err) {
-      console.log(err.message);
+      addToast({
+        type: "error",
+        title: "Algo deu errado",
+        description: "Cheque suas credenciais",
+      });
     }
   };
 
@@ -51,7 +57,7 @@ export default function Signin() {
         {errors.password && <p>{errors.password.message}</p>}
 
         <button type="submit">Sign in</button>
-        <Link to="signup">Sign up</Link>
+        <Link to="signup">Create you account</Link>
       </form>
     </AuthLayout>
   );
