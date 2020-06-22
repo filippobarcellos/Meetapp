@@ -6,8 +6,8 @@ import {
   MdPinDrop,
   MdPermContactCalendar,
 } from "react-icons/md";
-
-import banner from "../../assets/banner.jpeg";
+import api from "../../services/api";
+import history from "../../services/history";
 
 import { BtnContainer, Button, Content } from "./styles";
 
@@ -15,6 +15,17 @@ export default function Meetup() {
   const {
     state: { meetup },
   } = useLocation();
+
+  async function handleDelete(id) {
+    try {
+      await api.delete(`meetups/${id}`);
+
+      history.push("/dashboard");
+    } catch (err) {
+      console.log(err.message);
+    }
+  }
+
   return (
     <>
       <header>
@@ -24,7 +35,7 @@ export default function Meetup() {
             <MdEdit size={18} color="#fff" />
             Edit
           </Button>
-          <Button className="danger">
+          <Button className="danger" onClick={() => handleDelete(meetup._id)}>
             <MdDelete size={18} color="#fff" />
             Delete
           </Button>
@@ -32,7 +43,10 @@ export default function Meetup() {
       </header>
 
       <Content>
-        <img src={meetup.image} alt={meetup.title} />
+        <img
+          src={`http://localhost:5000/images/${meetup.banner}`}
+          alt={meetup.title}
+        />
         <p>{meetup.description}</p>
         <div>
           <span>
