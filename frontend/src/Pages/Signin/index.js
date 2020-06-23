@@ -9,6 +9,8 @@ import { ToastContext } from "../../context/Toast";
 
 import logo from "../../assets/logo.svg";
 
+import Spinner from "../../components/Spinner";
+
 import AuthLayout from "../_layouts/auth";
 
 const LoginSchema = yup.object().shape({
@@ -17,7 +19,12 @@ const LoginSchema = yup.object().shape({
 });
 
 export default function Signin() {
-  const { register, handleSubmit, errors } = useForm({
+  const {
+    register,
+    handleSubmit,
+    errors,
+    formState: { isSubmitting },
+  } = useForm({
     validationSchema: LoginSchema,
   });
 
@@ -27,6 +34,7 @@ export default function Signin() {
   const onSubmit = async ({ email, password }) => {
     try {
       await signIn({ email, password });
+
       history.push("/dashboard");
     } catch (err) {
       addToast({
@@ -56,7 +64,9 @@ export default function Signin() {
         />
         {errors.password && <p>{errors.password.message}</p>}
 
-        <button type="submit">Sign in</button>
+        <button type="submit">
+          {isSubmitting ? <Spinner size={20} color={"#fff"} /> : "Sign in"}
+        </button>
         <Link to="signup">Create you account</Link>
       </form>
     </AuthLayout>
