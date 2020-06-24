@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
+import api from "../../services/api";
+import history from "../../services/history";
 
 import logo from "../../assets/logo.svg";
 
-import AuthLayout from "../_layouts/auth";
+import { ToastContext } from "../../context/Toast";
 
 const RegisterSchema = yup.object().shape({
   name: yup.string().required(),
@@ -18,12 +20,34 @@ export default function Signup() {
     validationSchema: RegisterSchema,
   });
 
-  const onSubmit = ({ name, email, password }) => {
-    console.log({ email, password });
+  const { addToast } = useContext(ToastContext);
+
+  const onSubmit = async ({ name, email, password }) => {
+    try {
+      await api.post("/users", {
+        name,
+        email,
+        password,
+      });
+
+      addToast({
+        type: "success",
+        title: "User has been created",
+        description: "Please login",
+      });
+
+      history.push("/");
+    } catch (err) {
+      addToast({
+        type: "error",
+        title: "Something is not right",
+        description: "Please try again",
+      });
+    }
   };
 
   return (
-    <AuthLayout>
+    <>
       <img src={logo} alt="Meetapp" />
       <form onSubmit={handleSubmit(onSubmit)}>
         <input
@@ -53,6 +77,6 @@ export default function Signup() {
 
         <Link to="/">Sign in</Link>
       </form>
-    </AuthLayout>
+    </>
   );
 }

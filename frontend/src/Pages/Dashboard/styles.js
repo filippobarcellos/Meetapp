@@ -3,6 +3,7 @@ import { darken } from "polished";
 
 export const MeetupList = styled.div`
   margin-top: 40px;
+  height: 400px;
 
   p {
     color: #fff;
