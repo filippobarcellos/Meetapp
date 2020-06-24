@@ -5,9 +5,10 @@ import Route from "./Route";
 import Signin from "../Pages/Signin";
 import Signup from "../Pages/Signup";
 import Dashboard from "../Pages/Dashboard";
-import Meetup from "../Pages/Meetup";
+import MeetupDetails from "../Pages/Meetup/Details";
 import Profile from "../Pages/Profile";
-import New from "../Pages/New";
+import AddMeetup from "../Pages/Meetup/Add";
+import EditMeetup from "../Pages/Meetup/Edit";
 
 export default function Routes() {
   return (
@@ -15,10 +16,11 @@ export default function Routes() {
       <Route path="/" exact component={Signin} />
       <Route path="/signup" component={Signup} />
 
-      <Route path="/meetup/:id" component={Meetup} isPrivate />
+      <Route path="/meetup/:id" component={MeetupDetails} isPrivate />
       <Route path="/dashboard" component={Dashboard} isPrivate />
       <Route path="/profile" component={Profile} isPrivate />
-      <Route path="/new" component={New} isPrivate />
+      <Route path="/create-meetup" component={AddMeetup} isPrivate />
+      <Route path="/edit-meetup/:id" component={EditMeetup} isPrivate />
     </Switch>
   );
 }

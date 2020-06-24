@@ -1,13 +1,13 @@
 import React from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import {
   MdDelete,
   MdEdit,
   MdPinDrop,
   MdPermContactCalendar,
 } from "react-icons/md";
-import api from "../../services/api";
-import history from "../../services/history";
+import api from "../../../services/api";
+import history from "../../../services/history";
 
 import { BtnContainer, Button, Content } from "./styles";
 
@@ -31,10 +31,14 @@ export default function Meetup() {
       <header>
         <strong>{meetup.title}</strong>
         <BtnContainer>
-          <Button className="primary">
-            <MdEdit size={18} color="#fff" />
-            Edit
-          </Button>
+          <Link
+            to={{ pathname: `/edit-meetup/${meetup._id}`, state: { meetup } }}
+          >
+            <Button className="primary">
+              <MdEdit size={18} color="#fff" />
+              Edit
+            </Button>
+          </Link>
           <Button className="danger" onClick={() => handleDelete(meetup._id)}>
             <MdDelete size={18} color="#fff" />
             Delete
