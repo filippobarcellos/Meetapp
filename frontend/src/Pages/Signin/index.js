@@ -11,8 +11,6 @@ import logo from "../../assets/logo.svg";
 
 import Spinner from "../../components/Spinner";
 
-import AuthLayout from "../_layouts/auth";
-
 const LoginSchema = yup.object().shape({
   email: yup.string().email().required(),
   password: yup.string().required(),
@@ -46,7 +44,7 @@ export default function Signin() {
   };
 
   return (
-    <AuthLayout>
+    <>
       <img src={logo} alt="Meetapp" />
       <form onSubmit={handleSubmit(onSubmit)}>
         <input
@@ -69,6 +67,6 @@ export default function Signin() {
         </button>
         <Link to="signup">Create you account</Link>
       </form>
-    </AuthLayout>
+    </>
   );
 }

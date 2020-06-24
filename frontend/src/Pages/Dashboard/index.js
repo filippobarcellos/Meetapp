@@ -7,11 +7,14 @@ import { MdAddCircleOutline } from "react-icons/md";
 import api from "../../services/api";
 
 import MeetupCard from "../../components/MeetupCard";
+import Pagination from "../../components/Pagination";
 
 import { MeetupList, Button } from "./styles";
 
 export default function Dashboard() {
   const [meetups, setMeetups] = useState([]);
+  const [meetupsPerPage, setMeetupsPerPage] = useState(6);
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     async function loadMeetups() {
@@ -31,6 +34,15 @@ export default function Dashboard() {
     loadMeetups();
   }, []);
 
+  function handlePageChange(page) {
+    setCurrentPage(page);
+  }
+
+  const indexOfLastMeetup = meetupsPerPage * currentPage;
+  const indexOfFirstMeetup = indexOfLastMeetup - meetupsPerPage;
+
+  const meetupsPaginated = meetups.slice(indexOfFirstMeetup, indexOfLastMeetup);
+
   return (
     <>
       <header>
@@ -44,16 +56,26 @@ export default function Dashboard() {
       </header>
 
       <MeetupList>
-        {meetups &&
-          meetups.map((meetup) => (
+        {meetups.length > 0 ? (
+          meetupsPaginated.map((meetup) => (
             <Link
               key={meetup._id}
               to={{ pathname: `/meetup/${meetup._id}`, state: { meetup } }}
             >
               <MeetupCard meetup={meetup} />
             </Link>
-          ))}
+          ))
+        ) : (
+          <p>You don't have any meetup created.</p>
+        )}
       </MeetupList>
+
+      <Pagination
+        meetups={meetups}
+        meetupsPerPage={meetupsPerPage}
+        handlePageChange={handlePageChange}
+        currentPage={currentPage}
+      />
     </>
   );
 }

@@ -3,6 +3,12 @@ import { darken } from "polished";
 
 export const MeetupList = styled.div`
   margin-top: 40px;
+
+  p {
+    color: #fff;
+    opacity: 0.5;
+    font-size: 16px;
+  }
 `;
 
 export const Button = styled.button`
