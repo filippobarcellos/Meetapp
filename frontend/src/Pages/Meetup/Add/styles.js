@@ -67,6 +67,10 @@ export const InputWrapper = styled.div`
   align-items: center;
   position: relative;
 
+  img {
+    z-index: -2;
+  }
+
   div {
     position: absolute;
     display: flex;

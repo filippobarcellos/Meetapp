@@ -5,6 +5,7 @@ import {
   FiInfo,
   FiXCircle,
 } from "react-icons/fi";
+import { motion } from "framer-motion";
 
 import { ToastContext } from "../../../context/Toast";
 
@@ -30,18 +31,24 @@ function Toast({ message }) {
   }, [message.id, removeToast]);
 
   return (
-    <Container type={message.type}>
-      {icons[message.type]}
+    <motion.div
+      initial={{ x: 200, opacity: 0 }}
+      animate={{ x: 0, opacity: 1 }}
+      exit={{ x: 200, opacity: 0 }}
+    >
+      <Container type={message.type}>
+        {icons[message.type]}
 
-      <div>
-        <strong>{message.title}</strong>
-        <p>{message.description}</p>
-      </div>
+        <div>
+          <strong>{message.title}</strong>
+          <p>{message.description}</p>
+        </div>
 
-      <button type="button" onClick={() => removeToast(message.id)}>
-        <FiXCircle />
-      </button>
-    </Container>
+        <button type="button" onClick={() => removeToast(message.id)}>
+          <FiXCircle />
+        </button>
+      </Container>
+    </motion.div>
   );
 }
 

@@ -1,11 +1,14 @@
 import React from "react";
+import { useLocation } from "react-router-dom";
 
 import api from "../../../services/api";
 import history from "../../../services/history";
 
-import MeetupForm from "../../../components/MeetupForm";
-
 function EditMeetup() {
+  const {
+    state: { meetup },
+  } = useLocation();
+
   const onSubmit = async (data) => {
     const formData = new FormData();
 
@@ -23,7 +26,7 @@ function EditMeetup() {
     }
   };
 
-  return <MeetupForm onSubmit={onSubmit} />;
+  return <h1>TEste</h1>;
 }
 
 export default EditMeetup;

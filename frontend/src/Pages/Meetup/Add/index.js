@@ -1,10 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
+import { useForm } from "react-hook-form";
+import { MdCameraEnhance, MdAdd } from "react-icons/md";
+
 import api from "../../../services/api";
 import history from "../../../services/history";
 
-import MeetupForm from "../../../components/MeetupForm";
+import { Form, Button, InputWrapper } from "./styles";
 
 function AddMeetup() {
+  const [preview, setPreview] = useState(null);
+
+  const handleImageChange = (e) => {
+    setPreview(URL.createObjectURL(e.target.files[0]));
+  };
+
+  const { register, handleSubmit } = useForm();
+
   const onSubmit = async (data) => {
     const formData = new FormData();
 
@@ -22,7 +33,40 @@ function AddMeetup() {
     }
   };
 
-  return <MeetupForm onSubmit={onSubmit} />;
+  return (
+    <Form onSubmit={handleSubmit(onSubmit)}>
+      <InputWrapper>
+        <input
+          type="file"
+          name="image"
+          ref={register}
+          onChange={(e) => handleImageChange(e)}
+        />
+        {preview && <img src={preview} alt="Preview" />}
+        <div>
+          <MdCameraEnhance size={80} />
+          <span>Select Image</span>
+        </div>
+      </InputWrapper>
+      <input
+        type="text"
+        placeholder="Meetup Title"
+        name="title"
+        ref={register}
+      />
+      <textarea
+        type="text"
+        placeholder="Description"
+        name="description"
+        ref={register}
+      />
+      <input type="date" placeholder="Date" name="date" ref={register} />
+      <input type="text" placeholder="Local" name="location" ref={register} />
+      <Button type="submit" className="danger">
+        <MdAdd size={16} /> Add Meetup
+      </Button>
+    </Form>
+  );
 }
 
 export default AddMeetup;

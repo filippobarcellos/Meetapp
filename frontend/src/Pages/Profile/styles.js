@@ -1,5 +1,4 @@
 import styled, { keyframes } from "styled-components";
-import { darken } from "polished";
 
 const appear = keyframes`
   from {
@@ -33,32 +32,5 @@ export const Form = styled.form`
     border: 0;
     height: 1px;
     margin: 20px 0 20px 0;
-  }
-`;
-
-export const Button = styled.button`
-  align-self: flex-end;
-  color: #fff;
-  border: 0;
-  border-radius: 4px;
-  display: flex;
-  font-size: 14px;
-  font-weight: bold;
-  height: 44px;
-  justify-content: space-between;
-  margin: 5px 10px;
-  padding: 0 20px;
-  transition: background 0.2s;
-
-  svg {
-    margin-right: 10px;
-  }
-
-  &.danger {
-    background: #f94d6a;
-
-    &:hover {
-      background: ${darken(0.09, "#f94d6a")};
-    }
   }
 `;

@@ -53,7 +53,7 @@ export default function Signup() {
         <input
           type="text"
           name="name"
-          placeholder="Type your name"
+          placeholder="What's your name?"
           ref={register}
         />
         {errors.name && <p>{errors.name.message}</p>}
@@ -61,14 +61,14 @@ export default function Signup() {
         <input
           type="text"
           name="email"
-          placeholder="Type your email"
+          placeholder="What's your email?"
           ref={register}
         />
         {errors.email && <p>{errors.email.message}</p>}
         <input
           type="password"
           name="password"
-          placeholder="Type your password"
+          placeholder="Choose a password"
           ref={register}
         />
         {errors.password && <p>{errors.password.message}</p>}

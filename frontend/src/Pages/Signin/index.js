@@ -49,14 +49,14 @@ export default function Signin() {
       <form onSubmit={handleSubmit(onSubmit)}>
         <input
           type="text"
-          placeholder="Type your email"
+          placeholder="What's your email?"
           name="email"
           ref={register}
         />
         {errors.email && <p>{errors.email.message}</p>}
         <input
           type="password"
-          placeholder="Type your password"
+          placeholder="What's your password?"
           name="password"
           ref={register}
         />

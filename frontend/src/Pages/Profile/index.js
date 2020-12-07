@@ -5,7 +5,9 @@ import api from "../../services/api";
 
 import { AuthContext } from "../../context/Auth";
 
-import { Form, Button } from "./styles";
+import Button from "../../components/Button";
+
+import { Form } from "./styles";
 
 export default function Profile() {
   const { user, updateUser } = useContext(AuthContext);
@@ -63,8 +65,8 @@ export default function Profile() {
           ref={register}
         />
 
-        <Button type="submit" className="danger">
-          <MdAdd size={16} /> Save Profile
+        <Button type="submit" style={{ alignSelf: "flex-end" }}>
+          Save Profile
         </Button>
       </Form>
     </>
